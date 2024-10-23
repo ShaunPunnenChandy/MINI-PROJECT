@@ -37,8 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Handle YouTube link
     if (!empty($_POST['youtube_link'])) {
         $youtube_link = $conn->real_escape_string($_POST['youtube_link']);
-        $sql = "INSERT INTO materials (course_id, type, content, uploaded_at) 
-                VALUES ('$course_id', 'youtube', '$youtube_link', NOW())";
+        $description = $conn->real_escape_string($_POST['description']);
+        $sql = "INSERT INTO materials (course_id, type, content, description, uploaded_at) 
+                VALUES ('$course_id', 'youtube', '$youtube_link', '$description', NOW())";
         if ($conn->query($sql) === TRUE) {
             $message = "YouTube link added successfully!";
         } else {
@@ -50,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['material_file']) && $_FILES['material_file']['error'] == 0) {
         $file_name = basename($_FILES['material_file']['name']);
         $file_tmp = $_FILES['material_file']['tmp_name'];
-        $upload_dir = 'uploads/';
+        $description = $conn->real_escape_string($_POST['description']);
+        $upload_dir = '../uploads/';
         
         // Create directory if not exists
         if (!is_dir($upload_dir)) {
@@ -60,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $upload_file = $upload_dir . $file_name;
 
         if (move_uploaded_file($file_tmp, $upload_file)) {
-            $sql = "INSERT INTO materials (course_id, type, content, uploaded_at) 
-                    VALUES ('$course_id', 'file', '$upload_file', NOW())";
+            $sql = "INSERT INTO materials (course_id, type, content, description, uploaded_at) 
+                    VALUES ('$course_id', 'file', '$upload_file', '$description', NOW())";
             if ($conn->query($sql) === TRUE) {
                 $message = "File uploaded successfully!";
             } else {
@@ -73,6 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+// Fetch uploaded materials for this course
+$sql = "SELECT * FROM materials WHERE course_id = '$course_id' ORDER BY uploaded_at DESC";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 
 <div class="container mt-5">
+<a href="teacher_dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
     <h1>Upload Materials for Course ID: <?php echo $course_id; ?></h1>
 
     <?php if ($message): ?>
@@ -104,10 +110,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="file" class="form-control-file" name="material_file" accept=".pdf,.jpg,.jpeg,.png">
         </div>
 
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" placeholder="Enter description about the material" rows="3"></textarea>
+        </div>
+
         <button type="submit" class="btn btn-primary">Upload Material</button>
     </form>
 
-    <a href="teacher_dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    <!-- Display uploaded materials -->
+    <h2 class="mt-5">Uploaded Materials</h2>
+    <?php if ($result->num_rows > 0): ?>
+        <ul class="list-group">
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <li class="list-group-item">
+                    <?php if ($row['type'] == 'youtube'): ?>
+                        <strong>YouTube Link:</strong> <a href="<?php echo htmlspecialchars($row['content']); ?>" target="_blank"><?php echo htmlspecialchars($row['content']); ?></a>
+                    <?php else: ?>
+                        <strong>File:</strong> <a href="<?php echo htmlspecialchars($row['content']); ?>" target="_blank">Download</a>
+                    <?php endif; ?>
+                    <p><?php echo htmlspecialchars($row['description']); ?></p>
+                    <span class="badge badge-info"><?php echo date("F j, Y, g:i a", strtotime($row['uploaded_at'])); ?></span>
+                    
+                    <!-- Delete Button -->
+                    <form action="delete_material.php" method="post" class="d-inline">
+                        <input type="hidden" name="material_id" value="<?php echo $row['id']; ?>">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+    <?php else: ?>
+        <p>No materials uploaded yet.</p>
+    <?php endif; ?>
+
+    
 </div>
 
 <script src="/PROJECT/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
