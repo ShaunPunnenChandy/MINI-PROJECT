@@ -35,11 +35,11 @@ if (!isset($_SESSION['email'])) {
                         <a class="btn btn-primary btn-block mb-2" href="tutorials.php">
                             <i class="fa fa-book"></i> Course Materials
                         </a>
-                        <a class="btn btn-secondary btn-block mb-2" href="todo_list.php">
-                            <i class="fa fa-list"></i> To-Do List
-                        </a>
                         <a class="btn btn-warning btn-block mb-2" href="virtualkeyboard/index.php">
                             <i class="fa fa-music"></i> Musical Keyboard
+                        </a>
+                        <a class="btn btn-warning btn-block mb-2" href="profile.php">
+                            <i class="fa fa-music"></i> Profile
                         </a>
                         <a class="btn btn-info btn-block mb-2" href="ebooks.php">
                             <i class="fa fa-book"></i> e-Books
@@ -62,9 +62,6 @@ if (!isset($_SESSION['email'])) {
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Profile</button>
-                        </div>
                     </div>
                 </div>
 
@@ -154,22 +151,6 @@ if (!isset($_SESSION['email'])) {
                                     <li class="list-group-item">Office hours updated for "Advanced Musical Keyboard"</li>
                                     <li class="list-group-item">Webinar on music theory scheduled for Sep 20, 2024</li>
                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Links -->
-                    <div class="col-md-12">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h4>Quick Links</h4>
-                            </div>
-                            <div class="card-body d-flex flex-wrap gap-2">
-                                <a class="btn btn-outline-primary" href="profile.php">Profile</a>
-                                <a class="btn btn-outline-primary" href="settings.php">Settings</a>
-                                <a class="btn btn-outline-primary" href="grades.php">Grades</a>
-                                <a class="btn btn-outline-primary" href="forum.php">Discussion Forum</a>
-                                <a class="btn btn-outline-primary" href="support.php">Support</a>
                             </div>
                         </div>
                     </div>
