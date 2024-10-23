@@ -30,17 +30,26 @@ if (!isset($_SESSION['email'])) {
                 <div class="position-sticky">
                     <h4 class="text-center my-4">SonicScholar</h4>
                     <div class="d-grid gap-2">
-                        <a class="btn btn-primary btn-block mb-2" href="tutorials.php">
-                            <i class="fa fa-book"></i> Course Materials
+                    <a class="btn btn-secondary btn-block mb-2" href="dashboard.php">
+                            <i class="fa fa-list"></i> Dashboard
                         </a>
-                        <a class="btn btn-secondary btn-block mb-2" href="todo_list.php">
-                            <i class="fa fa-list"></i> To-Do List
+                    <a class="btn btn-primary btn-block mb-2" href="tutorials.php">
+                            <i class="fa fa-book"></i> Course Materials
                         </a>
                         <a class="btn btn-warning btn-block mb-2" href="virtualkeyboard/index.php">
                             <i class="fa fa-music"></i> Musical Keyboard
                         </a>
+                        <a class="btn btn-warning btn-block mb-2" href="profile.php">
+                            <i class="fa fa-music"></i> Profile
+                        </a>
                         <a class="btn btn-info btn-block mb-2" href="ebooks.php">
                             <i class="fa fa-book"></i> e-Books
+                        </a>
+                        <a class="btn btn-success btn-block mb-2" href="feedback.php">
+                            <i class="fa fa-comments"></i> Feedback
+                        </a>
+                        <a class="btn btn-primary btn-block mb-2" href="song_search.php">
+                            <i class="fa fa-search"></i> Song Search
                         </a>
                         <a class="btn btn-danger btn-block mb-2" href="logout.php">
                             <i class="fa fa-sign-out"></i> Logout
