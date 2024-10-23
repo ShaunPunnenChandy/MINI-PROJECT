@@ -9,7 +9,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 // Redirect to Gmail compose window
-$to = 'support@sonicscholar.com'; // Replace with your support email
+$to = 'shaunpunnenchandy@gmail.com'; // Replace with your support email
 $subject = 'Feedback on SonicScholar';
 $body = 'Please provide your feedback here.';
 
