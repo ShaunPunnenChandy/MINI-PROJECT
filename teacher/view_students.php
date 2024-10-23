@@ -79,7 +79,7 @@ $conn->close();
 
 <div class="container mt-4">
     <h1>View Students in Course</h1>
-    
+    <a href="teacher_dashboard.php" class="btn btn-primary">Back to Dashboard</a> 
     <!-- Course Selection Dropdown -->
     <form method="GET" action="">
         <div class="form-group">
@@ -132,7 +132,7 @@ $conn->close();
         </tbody>
     </table>
 
-    <a href="teacher_dashboard.php" class="btn btn-primary">Back to Dashboard</a>
+    
 </div>
 
 <script src="/PROJECT/vendor/jquery/jquery-3.2.1.min.js"></script>
