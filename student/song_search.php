@@ -1,6 +1,6 @@
 <?php
 // Replace 'YOUR_API_KEY' with your actual YouTube Data API key
-define('API_KEY', 'YOUR_API_KEY');
+define('API_KEY', 'AIzaSyCIZw7Sdy9z49oIygIeb4lW1yiY2R9ME0E');
 
 // Function to fetch YouTube search results
 function fetchYouTubeResults($query) {
@@ -12,7 +12,11 @@ function fetchYouTubeResults($query) {
         'maxResults' => 5 // Limit results to 5
     ]);
 
-    $response = file_get_contents($url);
+    $response = @file_get_contents($url); // Suppress warnings
+    if ($response === FALSE) {
+        return null; // Return null if request fails
+    }
+
     return json_decode($response, true);
 }
 
@@ -35,6 +39,37 @@ if ($searchQuery) {
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light">
+            <div class="position-sticky">
+                <h4 class="text-center my-4">SonicScholar</h4>
+                <div class="d-grid gap-2">
+                <a class="btn btn-secondary btn-block mb-2" href="dashboard.php">
+                            <i class="fa fa-list"></i> Dashboard
+                        </a>
+                    <a class="btn btn-primary btn-block mb-2" href="tutorials.php">
+                        <i class="fa fa-book"></i> Course Materials
+                    </a>
+                    <a class="btn btn-warning btn-block mb-2" href="virtualkeyboard/index.php">
+                        <i class="fa fa-music"></i> Musical Keyboard
+                    </a>
+                    <a class="btn btn-info btn-block mb-2" href="ebooks.php">
+                        <i class="fa fa-book"></i> e-Books
+                    </a>
+                    <a class="btn btn-success btn-block mb-2" href="feedback.php">
+                        <i class="fa fa-comments"></i> Feedback
+                    </a>
+                    <a class="btn btn-primary btn-block mb-2" href="song_search.php">
+                        <i class="fa fa-search"></i> Song Search
+                    </a>
+                    <a class="btn btn-danger btn-block mb-2" href="logout.php">
+                        <i class="fa fa-sign-out"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </nav>
     <div class="container mt-4">
         <h1>Song Search</h1>
         <form method="GET" action="song_search.php" class="mb-4">
@@ -47,7 +82,7 @@ if ($searchQuery) {
         <?php if ($searchQuery): ?>
             <h2>Results for "<?php echo htmlspecialchars($searchQuery); ?>"</h2>
             <div class="row">
-                <?php if (isset($results['items']) && !empty($results['items'])): ?>
+                <?php if ($results && isset($results['items']) && !empty($results['items'])): ?>
                     <?php foreach ($results['items'] as $item): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card">
@@ -60,7 +95,7 @@ if ($searchQuery) {
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>No results found.</p>
+                    <p>No results found or API error.</p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
