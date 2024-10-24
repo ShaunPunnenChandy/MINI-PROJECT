@@ -91,8 +91,11 @@ $result = $conn->query($sql);
 <body>
 
 <div class="container mt-5">
-<a href="teacher_dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    <a href="teacher_dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
     <h1>Upload Materials for Course ID: <?php echo $course_id; ?></h1>
+
+    <!-- Add Exam Button -->
+    <a href="add_exam.php?course_id=<?php echo $course_id; ?>" class="btn btn-success mb-3">Add Exam for This Course</a>
 
     <?php if ($message): ?>
         <div class="alert alert-info"><?php echo $message; ?></div>
@@ -131,7 +134,7 @@ $result = $conn->query($sql);
                     <?php endif; ?>
                     <p><?php echo htmlspecialchars($row['description']); ?></p>
                     <span class="badge badge-info"><?php echo date("F j, Y, g:i a", strtotime($row['uploaded_at'])); ?></span>
-                    
+
                     <!-- Delete Button -->
                     <form action="delete_material.php" method="post" class="d-inline">
                         <input type="hidden" name="material_id" value="<?php echo $row['id']; ?>">
@@ -144,7 +147,6 @@ $result = $conn->query($sql);
         <p>No materials uploaded yet.</p>
     <?php endif; ?>
 
-    
 </div>
 
 <script src="/PROJECT/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

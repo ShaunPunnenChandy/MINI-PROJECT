@@ -83,6 +83,7 @@ $courses = $result_courses->fetch_all(MYSQLI_ASSOC); // Fetch all courses as an 
         <a href="manage_courses.php">Manage Courses</a>
         <a href="view_students.php">View Students</a>
         <a href="teacher_profile.php">Profile</a>
+        <a href="view_results.php">Result</a>
         <a href="logout.php">Logout</a>
     </div>
 

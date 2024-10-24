@@ -87,7 +87,7 @@ $total_courses = $result_courses->fetch_assoc()['total_courses'];
         <a href="#">Dashboard</a>
         <a href="manage_teachers.php">Manage Teachers</a>
         <a href="manage_students.php">Manage Students</a>
-        <a href="#">Reports</a>
+        <!-- <a href="#">Reports</a>  -->
         <a href="logout.php">Logout</a>
     </div>
 
@@ -129,18 +129,6 @@ $total_courses = $result_courses->fetch_assoc()['total_courses'];
                 </div>
             </div>
         </div>
-
-        <!-- Recent Activities Section -->
-        <div class="mt-4">
-            <h2>Recent Activities</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Teacher John Doe added a new course.</li>
-                <li class="list-group-item">Student Jane Smith enrolled in a course.</li>
-                <li class="list-group-item">Teacher Alice Brown updated her profile.</li>
-            </ul>
-        </div>
-    </div>
-
     <script src="/PROJECT/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="/PROJECT/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

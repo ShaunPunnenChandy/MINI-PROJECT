@@ -83,6 +83,11 @@ if (!isset($_SESSION['email'])) {
                                             Keyboard Book 2
                                         </a>
                                     </li>
+                                    <li class="list-group-item">
+                                        <a href="SimpleGifts.pdf" target="_blank" class="btn btn-outline-primary btn-block">
+                                            Music Notation
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
